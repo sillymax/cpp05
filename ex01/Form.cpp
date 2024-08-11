@@ -6,7 +6,7 @@
 /*   By: ychng <ychng@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:26:17 by ychng             #+#    #+#             */
-/*   Updated: 2024/08/12 00:03:52 by ychng            ###   ########.fr       */
+/*   Updated: 2024/08/12 04:32:52 by ychng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ Form::Form(const string& name, short gradeToSign, short gradeToExec)
 	: name(name), gradeToSign(gradeToSign), gradeToExec(gradeToExec), isSigned(false)
 {
 	if (gradeToSign < 0 || gradeToExec < 0)
-		throw GradeTooLowException();
-	else if (gradeToSign > 150 || gradeToExec > 150)
 		throw GradeTooHighException();
+	else if (gradeToSign > 150 || gradeToExec > 150)
+		throw GradeTooLowException();
 	cout << "Form constructed user values" << endl;
 }
 
@@ -83,7 +83,7 @@ bool Form::getSignedState() const
 
 void Form::beSigned(Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() < gradeToSign)
+	if (bureaucrat.getGrade() > gradeToSign)
 		throw GradeTooLowException();
 	isSigned = true;
 }
